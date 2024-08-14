@@ -1,3 +1,9 @@
+run_processes:
+	docker compose -f "docker-compose.db.yml" down
+	docker compose -f "docker-compose.db.yml" up -d
+	docker compose -f "docker-compose.etl.yml" down
+	docker compose -f "docker-compose.etl.yml" up
+
 run_db:
 	docker compose -f "docker-compose.db.yml" down
 	docker compose -f "docker-compose.db.yml" up -d
