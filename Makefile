@@ -1,4 +1,4 @@
-run_processes:
+run_infra:
 	docker compose -f "docker-compose.db.yml" down
 	docker compose -f "docker-compose.db.yml" up -d
 	docker compose -f "docker-compose.etl.yml" down
@@ -11,6 +11,10 @@ run_db:
 run_etl:
 	docker compose -f "docker-compose.etl.yml" down
 	docker compose -f "docker-compose.etl.yml" up -d
+
+clean_infra:
+	docker compose -f "docker-compose.db.yml" down
+	docker compose -f "docker-compose.etl.yml" down
 
 reload_reqs:
 	poetry export -f requirements.txt --output ./.devcontainer/requirements.txt --without-hashes
