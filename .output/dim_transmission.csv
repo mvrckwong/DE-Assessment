@@ -1,6 +1,5 @@
-transmission
-automatic
-""
-manual
-Sedan
-sedan
+transmission_id,transmission
+1,Sedan
+2,automatic
+3,manual
+4,sedan
