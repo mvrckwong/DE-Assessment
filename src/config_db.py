@@ -19,7 +19,7 @@ def db_connection():
             raise ValueError(f'Environment variable {var} not set')
     
     # Database Connection URL and Create the SQLAlchemy engine
-    connect_url = f"postgresql://{getenv('DB_USER')}:{getenv('DB_PW')}@{getenv('DB_HOST')}/{getenv('DB_NAME')}?sslmode=require"
+    connect_url = f"postgresql://{getenv('DB_USER')}:{getenv('DB_PW')}@{getenv('DB_HOST')}/{getenv('DB_NAME')}?sslmode=prefer"
     engine = create_engine(connect_url)
     return engine
  
