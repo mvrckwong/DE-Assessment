@@ -27,6 +27,8 @@ There are 4 python data processes implemented.
 - Improve the security. (Azure Key Vault, AWS Secret Manager, HashiCorp Vault)
 - Improve the observability and monitoring. (Airflow, Mage)
 - Improve the performance. Consider other python libraries.
+- Develop the data quality checks.
+- Develop the CI/CD infrastructure.
 
 ## Getting Started / Implementation
 
@@ -83,4 +85,3 @@ For now, we will be using the command line with poetry to run the data-pipeline 
 ### Others (Docker, Connection Details)
 ![alt text](.images/docker.png)
 ![alt text](.images/connection_details.png)
-
