@@ -32,6 +32,42 @@ There are 4 python data processes implemented.
 
 ## Getting Started / Implementation
 
+### Prerequisite
+
+Before running the python streamlit application, you should have the following installed in your local machine. 
+
+1. Install the Python 3.9 or higher version, until 3.11. Also, install the latest version of the docker. We will be using docker-compose to run the airflow application (future) and the streamlit application.
+2. Install the poetry library. The library will handle all your python dependencies and virtual environment in your local machine.
+    ``` bash
+    pip install poetry
+    ```
+3. Install the project dependencies by installing. Poetry will handle all your python dependencies and virtual environment in your local machine.
+    ``` bash
+    poetry install
+    ```
+
+### Running the Data Pipeline
+
+Right now, some python functions are not 100% working in Airflow Deployment. For now, we will be using the command line with poetry to run the data-pipeline.
+
+- Running the pretest.py
+    ``` bash
+    poetry run python src/pretest.py
+    ```
+- Running the transform.py
+    ``` bash
+    poetry run python src/transform.py
+    ```
+- Running the ingest.py
+    ``` bash
+    poetry run python src/ingest.py
+    ```
+- Running the validate_ingest.py
+    ``` bash
+    poetry run python src/validate_ingest.py
+    ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Other Outputs
 
 ### Data Modeling
