@@ -3,7 +3,6 @@ from os import environ
 from pathlib import Path
 import pandas as pd
 
-
 # Specify the path of kaggle json token
 environ['KAGGLE_CONFIG_DIR'] = str(ENV_PATH)
 
