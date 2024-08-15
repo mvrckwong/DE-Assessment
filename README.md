@@ -1,6 +1,10 @@
 # DE-Assessment
 Data Engineering Assessment Test - 
 
+## Tech Stack
+
+## Roadmap
+
 ## Data Architecture
 
 ## Data Modeling
@@ -14,3 +18,5 @@ Data Engineering Assessment Test -
 ### Others (Docker, Connection Details)
 
 ### Pipeline Details
+
+![alt text](.images/db_stg_schema.png)
