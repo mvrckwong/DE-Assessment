@@ -11,7 +11,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      -  ${DB_PORT:-5432}:5432
+      -  ${DB_PORT:-65530}:5432
     # env_file:
     #   - ./environment/.env
 
@@ -23,7 +23,7 @@ services:
     volumes:
       - pgadmin_data:/var/lib/pgadmin
     ports:
-      - 5050:5050
+      - 5051:5050
     # env_file:
     #   - ./environment/.env
 
