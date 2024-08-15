@@ -31,6 +31,13 @@ clean_infra:
 reload_reqs:
 	poetry export -f requirements.txt --output .$(SEP).devcontainer$(SEP)requirements.txt --without-hashes
 
+
+run_pipelien:
+	poetry install
+	poetry run python src$(SEP)00_setup_db.py
+	poetry run python src$(SEP)01_ingest.py
+	peotry run python src$(SEP)02_transform.py
+
 test_py_setup:
 	poetry run python src$(SEP)00_setup_db.py
 
