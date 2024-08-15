@@ -6,7 +6,7 @@ This is the solution set for technical exam. All outputs are within ".images" fo
 
 ### Data Architecture
 Here is the data architecture guide to the Medallion Architecture, plus the technical stack. I almost always use this deployment strategy and data architecture in building the foundation of the data pipeline.
-![alt text](.images/data_architecture.png)
+![alt text](.images/data_architecture.jpg)
 
 ### Data Processes
 There are 4 python data processes implemented. 
