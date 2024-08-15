@@ -42,7 +42,7 @@ def transform_fact_tbl(data:pd.DataFrame) -> pd.DataFrame:
     columns_to_cap = ['transmission', 'seller', 'color', 'make', 'interior']
     data[columns_to_cap] = data[columns_to_cap].apply(lambda x: x.str.title().str.strip())
     data['state'] = data['state'].str.upper().str.strip()
-    data['color'] = data['color'].replace('‚Äî', np.nan)
+    # data['color'] = data['color'].replace('‚Äî', np.nan)
     
     # Rename Columns
     data.rename(
@@ -55,9 +55,6 @@ def transform_fact_tbl(data:pd.DataFrame) -> pd.DataFrame:
     
     return data
 
-##########################
-# Define the main function
-##########################
 
 def main() -> bool:
     CURRENT_SCHEMA = 'stg'
@@ -67,27 +64,44 @@ def main() -> bool:
     raw_df = pd.read_sql_table('raw_car_prices', ENGINE, schema='raw')
     
     # Transform main data
-    fact_data = transform_fact_tbl(data=raw_df)
+    raw_df = transform_fact_tbl(data=raw_df)
     
     # Create dimension tables
     dim_year, dim_transmission, dim_seller, dim_state, dim_maker = \
         create_dim_tbl(data=raw_df)
         
-    # Create the fact table
-    fact_car_prices = raw_df.copy()
+    # Create the fact table, then combine with dimension table
+    fact_car_prices_df = raw_df.copy()
+    fact_car_prices_df = fact_car_prices_df.merge(dim_transmission[['transmission', 'transmission_id']], on='transmission', how='left').drop('transmission', axis=1)
+    fact_car_prices_df = fact_car_prices_df.merge(dim_seller[['seller', 'seller_id']], on='seller', how='left').drop('seller', axis=1)
+    fact_car_prices_df = fact_car_prices_df.merge(dim_state[['state', 'state_id']], on='state', how='left').drop('state', axis=1)
+    fact_car_prices_df = fact_car_prices_df.merge(dim_maker[['make', 'make_id']], on='make', how='left').drop('make', axis=1)
     
-    fact_car_prices = fact_car_prices.merge(dim_maker[['make', 'make_id']], on='make', how='left')
-    fact_car_prices.to_csv(OUTPUT_PATH / 'fact.csv', index=False)
-        
-    # Map the foreign keys from dimension tables to the fact table
-    # fact_data = fact_data.merge(dim_transmission[['transmission', 'transmission_id']], on='transmission', how='left')
-    
-    # dim_transmission.to_csv(OUTPUT_PATH / 'dim_transmission.csv', index=False)
-    # fact_data.to_csv(OUTPUT_PATH / 'fact_table.csv', index=False)
-    
-    # Select relevant columns
-    year,make,model,trim,body,transmission,vin,state,condition,odometer,exterior_color,interior_color,seller,mmr,sellingprice,saledate,
-    
+    # Reorganize the data columns
+    fact_car_prices_df = fact_car_prices_df[
+        ['year', 'make_id', 'model', 'trim', 'body', 'transmission_id', 'vin', 'state_id', 'condition', 'odometer', 'exterior_color', 'interior_color', 'seller_id', 'mmr', 'sellingprice', 'saledate']
+    ]
+
+    # Export the data to the database
+    export_files = {
+        'dim_year': dim_year,
+        'dim_transmission': dim_transmission,
+        'dim_seller': dim_seller,
+        'dim_state': dim_state,
+        'dim_make': dim_maker,
+        'fact_car_prices': fact_car_prices_df
+    }
+
+    # Export each DataFrame to CSV
+    for tblname, df in export_files.items():
+        df.to_sql(
+            name=tblname,
+            con=ENGINE,
+            if_exists='replace',
+            index=False,
+            schema=CURRENT_SCHEMA
+        )
+
     return True
 
 

@@ -17,9 +17,6 @@ def main() -> bool:
     import kaggle
     kaggle.api.authenticate()
 
-    # Download kaggle dataset and metadata
-    # kaggle.api.dataset_download_files('syedanwarafridi/vehicle-sales-data', path=DATA_PATH, unzip=True)
-
     # Get the datasets
     csv_files = list(DATA_PATH.glob('*.csv'))
 
