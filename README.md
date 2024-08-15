@@ -11,10 +11,9 @@ Here is the data architecture guide to the Medallion Architecture, plus the tech
 ### Data Processes
 There are 4 python data processes implemented. 
 
-- 00_setup_db.py - Setup the database to the Medallion Architecture
+- 00_setup_db.py - Setup the database for the reference architecture. 
 - 01_ingest.py - Ingest the data to the database.
 - 02_transform.py - Transform the data from raw schema database, to staging schema database. This involve denormalization techniques, cleaning the data, processing the data, etc.
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Tech Stack
 - Python
@@ -29,14 +28,13 @@ There are 4 python data processes implemented.
 - Improve the observability and monitoring. (Airflow, Mage)
 - Improve the performance. Consider other python libraries.
 
-
 ## Getting Started / Implementation
 
 ### Prerequisite
 
 Before running the python streamlit application, you should have the following installed in your local machine. 
 
-1. Install the Python 3.9 or higher version, until 3.11. Also, install the latest version of the docker. We will be using docker-compose to run the airflow application (future) and the streamlit application.
+1. Install the Python 3.11. Also, install the latest version of the docker. We will be using docker-compose to run the postgresql database.
 2. Install the poetry library. The library will handle all your python dependencies and virtual environment in your local machine.
     ``` bash
     pip install poetry
@@ -45,28 +43,31 @@ Before running the python streamlit application, you should have the following i
     ``` bash
     poetry install
     ```
+4. Setup the database.
+    ``` bash
+    make run_db
+    ```
 
 ### Running the Data Pipeline
 
-Right now, some python functions are not 100% working in Airflow Deployment. For now, we will be using the command line with poetry to run the data-pipeline.
+For now, we will be using the command line with poetry to run the data-pipeline or the data processes.
 
-- Running the pretest.py
+- To run the entire pipeline
     ``` bash
-    poetry run python src/pretest.py
+    make run_pipeline
     ```
-- Running the transform.py
+- To run the a certain process. Running 00_setup_db.py
     ``` bash
-    poetry run python src/transform.py
+    make test_py_setup
     ```
-- Running the ingest.py
+- To run the a certain process. Running 01_ingest.py
     ``` bash
-    poetry run python src/ingest.py
+    make test_py_ingest
     ```
-- Running the validate_ingest.py
+- To run the a certain process. Running 02_transform.py
     ``` bash
-    poetry run python src/validate_ingest.py
+    make test_py_transform
     ```
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Other Outputs
 
