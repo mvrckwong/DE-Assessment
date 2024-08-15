@@ -1,9 +1,9 @@
 # DE-Assessment
 Data Engineering Assessment Test - 
 
-## Tech Stack
+### Tech Stack
 
-## Roadmap
+### Roadmap
 
 ## Getting Started
 
