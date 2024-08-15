@@ -1,8 +1,9 @@
 # DE-Assessment
 
 This is the solution set for technical exam. All outputs are within ".images" folder. The project implements the following:
-- Transformation from raw schema to staging schema
-- Transformation using python.
+- The database infrastructure inside the docker. 
+- Setup the database using python.
+- Ingestion and Transformation using python.
 
 ### Data Architecture
 Here is the data architecture guide to the Medallion Architecture, plus the technical stack. I almost always use this deployment strategy and data architecture in building the foundation of the data pipeline.
